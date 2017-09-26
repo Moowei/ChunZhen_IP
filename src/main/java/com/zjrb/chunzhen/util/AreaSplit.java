@@ -172,12 +172,13 @@ public class AreaSplit {
                     tempCityArr = tempProvinceArr[1].split(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix));//判断之后的字段是：州,市,地区,盟中的哪个，并按照该字段切分tempProvinceArr[1]
                     //因为存在"黑龙江省大庆市肇州县"和"河北省石家庄市赵州县"这种情况（会导致：黑龙江|大庆市肇州|县  中国|河北|石家庄市赵州|县），导致切分错误。
                     Boolean isZX = "州".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) && tempProvinceArr[1].endsWith("州县") && tempProvinceArr[1].contains("市");
-                    if(isZX){
+                    Boolean isZQ = "州".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) && tempProvinceArr[1].endsWith("州区") && tempProvinceArr[1].contains("市");
+                    if(isZX | isZQ){
                         ProvinceSuffix.counterZAX++;
                         tempCityArr = tempProvinceArr[1].split("市");
                     }
                     //为避免误解，若后缀为地区或州（如：贵州省黔南州荔波县），后缀不去除（结果：贵州;黔南州;荔波县）
-                    cityStr = "地区".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) | ("州".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) && !isZX)  ? tempCityArr[0]+ProvinceSuffix.SUFFIX_ARR.get(indexSuffix) : tempCityArr[0];
+                    cityStr = "地区".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) | ("州".equals(ProvinceSuffix.SUFFIX_ARR.get(indexSuffix)) && !isZX && !isZQ)  ? tempCityArr[0]+ProvinceSuffix.SUFFIX_ARR.get(indexSuffix) : tempCityArr[0];
 
                     if(isTest)
                         System.out.println(cityStr+",,,,,,,,,,,,,,,,,,,1-43,,,省-市(地区,州)");

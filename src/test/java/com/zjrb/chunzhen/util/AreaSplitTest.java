@@ -41,7 +41,7 @@ public class AreaSplitTest {
     private String str43 = "贵州省荔波县";
 
     private String str5 = "宁夏吴忠市盐池县";
-
+    private String str6 = "江苏省淮安市楚州区";
     private String str7 = "广东省广州市";//广东省惠州市//广东省梅州市丰顺县
     private String str8 = "重庆市万州区";
     private String str81 = "湖北省恩施州宣恩县";//湖北省恩施州宣恩县//湖北省荆州市松滋市
@@ -58,7 +58,7 @@ public class AreaSplitTest {
         AreaSplit areaSplit = new AreaSplit();
 //        System.out.println(areaSplit.getArea(str1).getAreaString());
         IPEntry ipEntry = new IPEntry();
-        ipEntry = areaSplit.getArea(str82,true);
+        ipEntry = areaSplit.getArea(str6,true);
         System.out.println(ipEntry.getAreaSplited());
         System.out.println("flage : " +ipEntry.getFlage());
     }
